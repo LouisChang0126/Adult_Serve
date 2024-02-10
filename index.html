@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>青崇班表</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-firestore.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+  <label class="checkbox"><input class="largeCheckbox" id="checkbox_info" type="checkbox"/>重要資訊</label>
+  <label class="checkbox"><input class="largeCheckbox" id="checkbox_band" type="checkbox" checked/>敬拜團</label>
+  <label class="checkbox"><input class="largeCheckbox" id="checkbox_not_band" type="checkbox" checked/>非敬拜團</label>
+	<button class="button is-link is-outlined" id="dl_chart">下載班表</button>
+  <table class="table is-striped is-bordered">
+        <thead>
+          <tr>
+            <th class=" has-background-link-light">日期</th>
+            <th class="info_show is-hidden has-background-link-light">重要資訊</th>
+            <th class="band_show has-background-success">主領/副主領/助唱</th>
+            <th class="band_show has-background-success">樂手</th>
+            <th class="band_show has-background-success">音控</th>
+            <th class="not_band_show has-background-danger-light">提醒人</th>
+            <th class="not_band_show has-background-danger-light">字幕</th>
+            <th class="not_band_show has-background-danger-light">司會</th>
+            <th class="not_band_show has-background-danger-light">奉獻</th>
+            <th class="not_band_show has-background-danger-light">招待</th>
+            <th class="not_band_show has-background-danger-light">會前</th>
+            <th class="not_band_show has-background-danger-light">先知性</th>
+          </tr>
+        </thead>
+        <tbody id="chart"></tbody>
+  </table>
+	
+    
+</body>
+
+<script src="firestore.js" ></script>
+<style>
+  .checkbox {
+    font-size: 2em;
+  }
+  input.largeCheckbox {
+    width: 25px;
+    height:25px;
+  }
+
+  /* 新增的樣式 */
+  thead {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+  }
+</style>
+</html>
