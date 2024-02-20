@@ -27,8 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 const mixer = (data.音控.includes(user)) ? 'class="band_show has-background-warning"' : 'class="band_show"';
                 const ppt = (data.字幕1.includes(user) || data.字幕2.includes(user)) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
                 const anchor = (data.司會 === user) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
-                //LOUIS
-                const offering = (data.奉獻 === user) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
+                const offering = (data.奉獻.includes(user)) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
                 const welcomer = (data.招待.includes(user)) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
                 const feast = (data.愛宴.includes(user)) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
                 const prayer = (data["會前(後)"].includes(user)) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
