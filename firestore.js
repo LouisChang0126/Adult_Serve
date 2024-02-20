@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 const data = doc.data();
                 //hightlight
                 const microphone = (data.主領 === user || data.副主領 === user || data.助唱.includes(user)) ? 'class="band_show has-background-warning"' : 'class="band_show"';
-                const instruments = (data.司琴 === user || data.鼓手 === user || data.司琴2 === user || data.吉他 === user) ? 'class="band_show has-background-warning"' : 'class="band_show"';
+                const instruments = (data.司琴 === user || data.鼓手 === user || data.貝斯 === user || data.吉他 === user) ? 'class="band_show has-background-warning"' : 'class="band_show"';
                 const mixer = (data.音控.includes(user)) ? 'class="band_show has-background-warning"' : 'class="band_show"';
                 const ppt = (data.字幕1.includes(user) || data.字幕2.includes(user)) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
                 const anchor = (data.司會 === user) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
@@ -53,11 +53,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 var band;
                 if (data.司琴 != " ") {
                     band = data.司琴 + '/' + data.鼓手;
-                    //LOUIS
-                    /*
-                    if(data.司琴2 != " ") band += '/' + data.司琴2;
+                    if(data.貝斯 != " ") band += '/' + data.貝斯;
                     else if(data.吉他 != " ") band += '/' + data.吉他;
-                    */
                 }
                 else {
                     band = ''; // 或者设置一个默认值，具体取决于你的需求
