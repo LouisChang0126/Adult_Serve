@@ -16,7 +16,7 @@ const user = urlParams.get('user');
 
 // 在DOM加载完毕后执行
 document.addEventListener("DOMContentLoaded", function() {
-    db.collection("serve").get().then((querySnapshot) => {
+    db.collection("adult_serve").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             if (doc.exists) {
                 // 获取文档数据
@@ -25,13 +25,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 const microphone = (data.主領 === user || data.副主領 === user || data.助唱.includes(user)) ? 'class="band_show has-background-warning"' : 'class="band_show"';
                 const instruments = (data.司琴 === user || data.鼓手 === user || data.司琴2 === user || data.吉他 === user) ? 'class="band_show has-background-warning"' : 'class="band_show"';
                 const mixer = (data.音控.includes(user)) ? 'class="band_show has-background-warning"' : 'class="band_show"';
-                const reminder = (data.提醒人 === user) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
-                const ppt = (data.字幕.includes(user)) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
+                const ppt = (data.字幕1.includes(user) || data.字幕2.includes(user)) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
                 const anchor = (data.司會 === user) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
+                //LOUIS
                 const offering = (data.奉獻 === user) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
                 const welcomer = (data.招待.includes(user)) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
-                const prayer = (data["會前"].includes(user)) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
-                const prophetic = (data.先知性.includes(user)) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
+                const feast = (data.愛宴.includes(user)) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
+                const prayer = (data["會前(後)"].includes(user)) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
+                const newguy = (data.新人.includes(user)) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
+                const prophetic = (data.禱告.includes(user)) ? 'class="not_band_show has-background-warning"' : 'class="not_band_show"';
                 //重要資訊 換行
                 var info;
                 if (Array.isArray(data.重要資訊)) {
@@ -52,13 +54,23 @@ document.addEventListener("DOMContentLoaded", function() {
                 var band;
                 if (data.司琴 != " ") {
                     band = data.司琴 + '/' + data.鼓手;
-
+                    //LOUIS
+                    /*
                     if(data.司琴2 != " ") band += '/' + data.司琴2;
                     else if(data.吉他 != " ") band += '/' + data.吉他;
+                    */
                 }
                 else {
                     band = ''; // 或者设置一个默认值，具体取决于你的需求
                     //console.log('重要資訊不是一个数组');
+                }
+                //字幕
+                var ppts;
+                if (data.字幕1 != " ") {
+                    ppts = data.字幕1 + '/' + data.字幕2;
+                }
+                else {
+                    ppts = '';
                 }
                 //內文
                 document.getElementById('chart').innerHTML += `
@@ -68,26 +80,20 @@ document.addEventListener("DOMContentLoaded", function() {
                     <th ${microphone}>${vocal}</th>
                     <th ${instruments}>${band}</th>
                     <th ${mixer}>${data.音控}</th>
-                    <th ${reminder}>${data.提醒人}</th>
-                    <th ${ppt}>${data.字幕}</th>
+                    <th class="band_show">${data.彩排}</th>
+                    <th ${ppt}>${ppts}</th>
                     <th ${anchor}>${data.司會}</th>
                     <th ${offering}>${data.奉獻}</th>
                     <th ${welcomer}>${data.招待}</th>
-                    <th ${prayer}>${data["會前"]}</th>
-                    <th ${prophetic}>${data.先知性}</th>
+                    <th ${feast}>${data.愛宴}</th>
+                    <th ${prayer}>${data["會前(後)"]}</th>
+                    <th ${newguy}>${data.新人}</th>
+                    <th ${prophetic}>${data.禱告}</th>
                 </tr>
                 `;
             }
         });
     });
-    /*
-    if (window.innerWidth <= 768) {
-        var par = document.querySelectorAll('.info_show');
-        par.forEach(function(paragraph) {
-            paragraph.classList.toggle('is-hidden');
-        });
-        console.log("hi");
-    }*/
 });
 
 document.getElementById("checkbox_info").addEventListener('change', function() {
