@@ -54,11 +54,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (data.司琴 != " ") {
                     band = data.司琴 + '/' + data.鼓手;
                     if(data.貝斯 != " ") band += '/' + data.貝斯;
-                    else if(data.吉他 != " ") band += '/' + data.吉他;
+                    if(data.吉他 != " ") band += '/' + data.吉他;
                 }
                 else {
-                    band = ''; // 或者设置一个默认值，具体取决于你的需求
-                    //console.log('重要資訊不是一个数组');
+                    band = '';
                 }
                 //字幕
                 var ppts;
